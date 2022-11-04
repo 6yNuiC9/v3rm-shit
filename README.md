@@ -1,5 +1,5 @@
 # v3rm monkey den update
-i hate when people use ":)" stop being happy im not happy
+i hate when people use ":)" stop being happy im not happy, "let people enjoy things" sheesh how about i fukcing-
 
 long awaited v3rm retardation update sequel: monkey den
 
