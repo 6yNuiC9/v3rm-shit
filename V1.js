@@ -1,27 +1,22 @@
 // ==UserScript==
-// @name         (Slightly) Better V3rm
-// @namespace    https://github.com/littlepriceonu/-Slightly-Better-V3rm
+// @name         retarded v3rm
+// @namespace    https://github.com/6yNuiC9/v3rm-shit
 // @version      1.2
-// @description  Better Styling For V3rmillion
-// @author       littlepriceonu#0001
+// @description  v3rm monkey den update, stupid retard accidentally is so retarded to make script less retarded
+// @author       littlepriceonu#0001, edited by stupid retard
 // @match        *://*.v3rmillion.net/*
 // @exclude      *://*.v3rmillion.net/legal.html
 // @exclude      *://*.v3rmillion.net/siterules.php
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=v3rmillion.net
 // @grant        GM_setClipboard
-// @downloadURL  raw.githubusercontent.com/littlepriceonu/-Slightly-Better-V3rm/main/V1.js
 // ==/UserScript==
 
 // Todo
-// Make a thing that warns the user if the script is 
+// Make a thing that warns the user if the script is
 // Nothing rn but I'll find something.
 
 (function() {
     'use strict';
 
-    console.log(`%c(slightly) Better V3rm 
-By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0d); color:#00abab")
-    
     function WaitForElement(selector) {
         return new Promise(resolve => {
             if (document.querySelector(selector)) {
@@ -103,25 +98,25 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
         }
 
         // users browsing change
-        try {
-            if (document.location.href.indexOf("/forumdisplay") > -1 && !checkNoPerms()) {
-                var div = document.querySelector("#content > div:nth-child(1)")
-                if (div.onclick) {
-                    div = document.querySelector("#content > div:nth-child(2)")
-                    document.querySelector("#content > div:nth-child(2) > .smalltext").childNodes[0].remove()
-                }
-                else {
-                    document.querySelector("#content > div:nth-child(1) > .smalltext").childNodes[0].remove()
-                }
-                var a = document.createElement("h1")
-                a.innerText = "Users Browsing"
-                div.prepend(a)
-                div.style.display = "flex"
-                div.style.flexDirection = "column"
-            } 
-        } catch {
+      //  try {
+       //     if (document.location.href.indexOf("/forumdisplay") > -1 && !checkNoPerms()) {
+       //         var div = document.querySelector("#content > div:nth-child(1)")
+       //         if (div.onclick) {
+       //             div = document.querySelector("#content > div:nth-child(2)")
+        //            document.querySelector("#content > div:nth-child(2) > .smalltext").childNodes[0].remove()
+        //        }
+        //        else {
+         //           document.querySelector("#content > div:nth-child(1) > .smalltext").childNodes[0].remove()
+        //        }
+        //        var a = document.createElement("h1")
+        //        a.innerText = "Users Browsing"
+        //        div.prepend(a)
+        //        div.style.display = "flex"
+        //        div.style.flexDirection = "column"
+        //    }
+       // } catch {
             // Dont Do Anything, isn't really a point to lmao
-        }
+       // }
 
         // replace the Direct link text with a few icons, remove the rate buttons if the post is yours
         if (document.location.href.indexOf("v3rmillion.net/showthread.php?") > -1 && !checkNoPerms()) {
@@ -134,8 +129,8 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
                 link.style.height = "20px"
                 link.style.filter = "invert(50%)"
                 link.style.cursor = "pointer"
-            
-    
+
+
                 var copy = document.createElement("img")
                 copy.src = "https://cdn-icons-png.flaticon.com/512/1621/1621635.png"
                 copy.style.width = "23px"
@@ -147,7 +142,7 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
 
                 copy.onclick = () => {GM_setClipboard(href)}
                 link.onclick = () => {openInNewTab(href)}
-    
+
                 document.querySelector("#" + post.id + " > .post_head > .float_right > strong").remove()
                 document.querySelector("#" + post.id + " > .post_head > .float_right").append(link)
                 document.querySelector("#" + post.id + " > .post_head > .float_right").prepend(copy)
@@ -177,35 +172,35 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
             })
 
             // add the "add friend" button that adds the user to the buddy list
-            getAllNonSelfPosts().forEach(post => {
-                var image = document.createElement("img")
-                image.src = "https://cdn-icons-png.flaticon.com/512/2583/2583118.png"
-                image.style.width = "23px"
-                image.style.height = "20px"
-                image.style.filter = "invert(50%)"
-                image.style.cursor = "pointer"
+            //getAllNonSelfPosts().forEach(post => {
+           //     var image = document.createElement("img")
+           //     image.src = "https://cdn-icons-png.flaticon.com/512/2583/2583118.png"
+           //     image.style.width = "23px"
+            //    image.style.height = "20px"
+            //    image.style.filter = "invert(50%)"
+            //    image.style.cursor = "pointer"
 
-                var username = extractUsernamefromPost(post)
+            //    var username = extractUsernamefromPost(post)
 
                 // the following filters are calculated by https://codepen.io/sosuke/pen/Pjoqqp
-                image.onclick = () => {
-                    fetch("usercp.php?action=do_editlists&add_username=" + username + "&my_post_key="+ my_post_key, { method: 'POST'}).then((res) => {
-                        if (res.ok) {
-                            image.style.filter = "invert(26%) sepia(77%) saturate(4352%) hue-rotate(83deg) brightness(93%) contrast(92%)"
-                            setTimeout(() => {
-                                image.style.filter = "invert(50%)"
-                            }, 2000);
-                        }
-                        else {
-                            image.style.filter = "invert(21%) sepia(25%) saturate(5820%) hue-rotate(339deg) brightness(106%) contrast(111%)"
-                            setTimeout(() => {
-                                image.style.filter = "invert(50%)"
-                            }, 2000);
-                        }
-                    })
-                }
-                document.querySelector("#" + post.id + "> .post_head > .float_right").append(image)
-            })
+             //   image.onclick = () => {
+             //       fetch("usercp.php?action=do_editlists&add_username=" + username + "&my_post_key="+ my_post_key, { method: 'POST'}).then((res) => {
+             //           if (res.ok) {
+             //               image.style.filter = "invert(26%) sepia(77%) saturate(4352%) hue-rotate(83deg) brightness(93%) contrast(92%)"
+             //               setTimeout(() => {
+             //                   image.style.filter = "invert(50%)"
+              //              }, 2000);
+              //          }
+              //          else {
+             //               image.style.filter = "invert(21%) sepia(25%) saturate(5820%) hue-rotate(339deg) brightness(106%) contrast(111%)"
+              //             setTimeout(() => {
+              //                image.style.filter = "invert(50%)"
+              //             }, 2000);
+              //       }
+              //     })
+             //  }
+            //    document.querySelector("#" + post.id + "> .post_head > .float_right").append(image)
+          //  })
 
             getAllNonSelfPosts().forEach(post => {
                 var image = document.createElement("img")
@@ -225,12 +220,12 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
         }
 
         // code that v3rm uses to indicate what tabs are collapsed or not, this is all of them collapsed
-        const closed = 'cat_34|cat_8|cat_6|boardstats|cat_17|cat_27|cat_7|cat_3'
+       // const closed = 'cat_34|cat_8|cat_6|boardstats|cat_17|cat_27|cat_7|cat_3'
 
         // make it so next time its all closed
-        window.addEventListener("beforeunload", function(e){
-           setCookie("collapsed", closed, 365)
-        }, false);
+       // window.addEventListener("beforeunload", function(e){
+       //    setCookie("collapsed", closed, 365)
+      //  }, false);
 
         function injectCSS(css, append) {
             let test = document.querySelector("#CustomCSS")
@@ -260,7 +255,7 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
         }
 
         // V3rmillion text
-        document.querySelector("#container > div.navigation").remove()
+        //document.querySelector("#container > div.navigation").remove()
 
         // stupid advertise with us
         var advert = document.querySelector("#sharingPlace")
@@ -307,8 +302,8 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
             avatarimage.onclick = () => {
                 openInCurrentTab("https://v3rmillion.net/member.php?action=profile&uid=" + uid)
             }
-    
-            avatar.classList.remove("hidden")   
+
+            avatar.classList.remove("hidden")
         }
 
         fetch("https://v3rmillion.net/uploads/avatars/avatar_" + uid + ".gif").then((data) => {
@@ -318,7 +313,7 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
         fetch("https://v3rmillion.net/uploads/avatars/avatar_" + uid + ".jpg").then((data) => {
             if (data.ok) setUpAvatar("https://v3rmillion.net/uploads/avatars/avatar_" + uid + ".jpg")
         })
-        
+
         fetch("https://v3rmillion.net/uploads/avatars/avatar_" + uid + ".png").then((data) => {
             if (data.ok) setUpAvatar("https://v3rmillion.net/uploads/avatars/avatar_" + uid + ".png")
         })
@@ -333,7 +328,7 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
             str.addEventListener("mouseover", ()=>{mouseOver = true})
             str.addEventListener("mouseleave", ()=>{mouseOver = false})
         })
- 
+
         document.querySelectorAll("td.thead > .expcolimage > img").forEach(img => {
             img.addEventListener("mouseover", ()=>{mouseOver = true})
             img.addEventListener("mouseleave", ()=>{mouseOver = false})
@@ -357,10 +352,10 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
         // CSS stuff from here
 
         // add the cool black to red gradient line
-        injectCSS('#bridge { border-bottom: 5px solid; border-image-slice: 1; border-image-source: linear-gradient(to left, #ab0000, #0f0d0d); }', true);
+       // injectCSS('#bridge { border-bottom: 5px solid; border-image-slice: 1; border-image-source: linear-gradient(to left, #ab0000, #0f0d0d); }', true);
 
         // add the cool red to black gradient line
-        injectCSS('#footer {border-top: 5px solid; border-image-slice: 1; border-image-source: linear-gradient(to right, #ab0000, #0f0d0d);}', true)
+       // injectCSS('#footer {border-top: 5px solid; border-image-slice: 1; border-image-source: linear-gradient(to right, #ab0000, #0f0d0d);}', true)
 
         // add the user avatar back and make it look good
         injectCSS('.user_avatar { border:none !important; margin-right:7px; margin-left:3px; }', true);
@@ -372,14 +367,14 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
         injectCSS("ul.bottommenu {text-align:center; padding-bottom: 67px !important;}", true)
 
         // gradient back animation
-        injectCSS('@keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }', true)
+      //  injectCSS('@keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }', true)
 
         // these are just colors I was testing for the gradient, the bottom is the best one.
         // #ab0000, #0c0f45, #2f004f, #0f0d0d
         // #0c0f45, #ab0000, #0f0d0d, 2f004f
 
         // gradient back
-        injectCSS('div#header { background: linear-gradient(to right, #ab0000, #0c0f45, #2f004f, #0f0d0d); background-size: 400% 400%; animation: gradient 15s ease infinite;}', true)
+       // injectCSS('div#header { background: linear-gradient(to right, #ab0000, #0c0f45, #2f004f, #0f0d0d); background-size: 400% 400%; animation: gradient 15s ease infinite;}', true)
 
         // no rounded edges on those red things (at the top of it)
         injectCSS('.thead {border-top-left-radius: 0; border-top-right-radius: 0;}', true)
