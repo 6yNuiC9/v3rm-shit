@@ -15,7 +15,7 @@ including:
 
 ## do not check it out or i will be overwhelmed by people interacting with me
 
-script [here dont actually press though](https://github.com/6yNuiC9/v3rm-shit/blob/main/V1.js)
+script [here dont actually press though](https://github.com/6yNuiC9/v3rm-shit/blob/main/monkey-den-real.js)
 
 
 
