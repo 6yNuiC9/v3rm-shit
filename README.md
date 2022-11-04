@@ -1,7 +1,7 @@
 # v3rm monkey den update
 i hate when people use ":)" stop being happy im not happy, "let people enjoy things" sheesh how about i fukcing-
 
-long awaited v3rm retardation update sequel: monkey den
+long awaited v3rm retardation update sequel: monkey den tyrone big black strong man power update 2022
 
 including:
 
