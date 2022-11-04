@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         retarded v3rm
 // @namespace    https://github.com/6yNuiC9/v3rm-shit
-// @version      1.2
+// @version      math.huge
 // @description  v3rm monkey den update, stupid retard accidentally is so retarded to make script less retarded
 // @author       littlepriceonu#0001, edited by stupid retard
 // @match        *://*.v3rmillion.net/*
