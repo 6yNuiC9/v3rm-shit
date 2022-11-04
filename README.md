@@ -1,11 +1,14 @@
-# (Slightly) Better V3rm
+# v3rm monkey den update
+i hate when people use ":)" stop being happy im not happy
 
-A tampermonkey script for vermillon.net. Adds a few new features and some styling things.
+long awaited v3rm retardation update sequel: monkey den
 
-Looking at v3rm alot for roblox stuff, I figured that I might as well take a shot at making it look better and probably adding a few new features and stuff along the way
+including:
+we added the go back thread button back
+we removed the stupid fucking gradient
+we removed the add to buddy list button i dont have friends ffs i dont want to see add friend
+i dont fucking remember what else i did
 
-(including easter eggs :) )
+## do not check it out or i will be overwhelmed by people interacting with me
 
-## check it out and see if you like it!
-
-Script [Here](https://raw.githubusercontent.com/littlepriceonu/-Slightly-Better-V3rm/main/V1.js)
+script [here](https://github.com/6yNuiC9/v3rm-shit/blob/main/V1.js)
