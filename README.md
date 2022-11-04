@@ -4,6 +4,7 @@ i hate when people use ":)" stop being happy im not happy, "let people enjoy thi
 long awaited v3rm retardation update sequel: monkey den
 
 including:
+
 -we added the go back thread button back
 
 -we removed the stupid fucking gradient
