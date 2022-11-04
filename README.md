@@ -11,7 +11,7 @@ including:
 
 -we removed the add to buddy list button i dont have friends ffs i dont want to see add friend
 
--i dont fucking remember what else i did
+-i dont fucking remember what else i did "we" is a lie stop reading i dont have other people
 
 ## do not check it out or i will be overwhelmed by people interacting with me
 
