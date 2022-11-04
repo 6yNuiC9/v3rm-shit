@@ -19,4 +19,4 @@ script [here dont actually press though](https://github.com/6yNuiC9/v3rm-shit/bl
 
 
 
-(PS: JavaScript is a retarded language i hate)
+(PS: js is a retarded language i hate)
