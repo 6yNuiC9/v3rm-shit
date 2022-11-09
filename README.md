@@ -3,7 +3,21 @@ i hate when people use ":)" stop being happy im not happy, "let people enjoy thi
 
 long awaited v3rm retardation update sequel: monkey den tyrone big black strong man power update 2022
 
+
+
 including:
+
+-bugfixes
+
+-less retardation
+
+
+
+
+
+
+
+EVERYTHING IS A LIE:
 
 -we added the go back thread button back
 
