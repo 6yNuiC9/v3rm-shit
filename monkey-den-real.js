@@ -2,8 +2,8 @@
 // @name         retarded v3rm
 // @namespace    https://github.com/6yNuiC9/v3rm-shit/blob/main/monkey-den-real.js
 // @version      math.huge
-// @description  v3rm monkey den update, stupid retard accidentally is so retarded to make script less retarded
-// @author       littlepriceonu#0001, edited by stupid retard
+// @description  still feel stupid
+// @author       littlepriceonu#0001, edited by monkey den strong retard(singular) united
 // @match        *://*.v3rmillion.net/*
 // @exclude      *://*.v3rmillion.net/legal.html
 // @exclude      *://*.v3rmillion.net/siterules.php
@@ -11,11 +11,47 @@
 // ==/UserScript==
 
 // Todo
-// Make a thing that warns the user if the script is
-// Nothing rn but I'll find something.
+// Make a thing that warns the user if the script is not updated
+// Add lock thing next to open button on index.php
+// Make the friends button green if you have them added and make it so you can unadd them if you have them added and same thing with if you have a request out for them.
 
 (function() {
     'use strict';
+
+    const PopupHTML = '' +
+    '        <div id="SettingsMenu">' +
+    '            <div class="toprow">' +
+    '                <h2 style="margin-left: 10px;">Settings</h2>' +
+    '' +
+    '                <h2 style="color:black; margin-left: auto; margin-right: 10px;" id="closesettings">X</h2>' +
+    '            </div>' +
+    '    ' +
+    '            <div class="options">' +
+    '                <div class="option"> <h5>tog gradients</h5> <input type="checkbox" name="Gradient" id="GradientToggle"></div>' +
+    '                <div class="option"> <h5>buddy list button</h5> <input type="checkbox" name="BuddyButton" id="BuddyToggle"></div>' +
+    '                <div class="option"> <h5>inject reputation button</h5> <input type="checkbox" name="ReputationButton" id="ReputationToggle"></div>' +
+    '                <div class="option"> <h5>close homepage tabs</h5> <input type="checkbox" name="CloseSections" id="SectionsToggle"></div>' +
+    '            </div>' +
+    '' +
+    '            <div class="settingsfooter">' +
+    '                <h2>retarded platos man</h2>' +
+    '            </div>' +
+    '        </div>' +
+    '';
+
+  /*  console.log(`%c(slightly) Better V3rm
+By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0d); color:#00abab")*/
+
+    // https://stackoverflow.com/questions/48759219/access-dom-from-a-different-html-file-with-js
+   /* function LoadWebDom(url) {
+        fetch(url)
+            .then((response) => response.text())
+            .then((text) => {
+                const otherDoc = document.implementation.createHTMLDocument().documentElement;
+                otherDoc.innerHTML = text;
+                window.test = otherDoc
+        });
+    }*/
 
     function WaitForElement(selector) {
         return new Promise(resolve => {
@@ -85,6 +121,17 @@
         const uid = param.get('uid')
         window.uid = uid
 
+        var settingsarray = {
+            enableGradients: true,
+            injectBuddyButton: true,
+            injectRepButton: true,
+            closeAllSections: true,
+        }
+
+        if (getCookie("BetterV3rmSettings") != "") {
+            settingsarray = JSON.parse(getCookie("BetterV3rmSettings"))
+        }
+
         // page specific features
         // little easter egg
         if (document.location.href.indexOf("v3rmillion.net/member.php?") > -1 && !checkNoPerms()) {
@@ -98,25 +145,29 @@
         }
 
         // users browsing change
-      //  try {
-       //     if (document.location.href.indexOf("/forumdisplay") > -1 && !checkNoPerms()) {
-       //         var div = document.querySelector("#content > div:nth-child(1)")
-       //         if (div.onclick) {
-       //             div = document.querySelector("#content > div:nth-child(2)")
-        //            document.querySelector("#content > div:nth-child(2) > .smalltext").childNodes[0].remove()
-        //        }
-        //        else {
-         //           document.querySelector("#content > div:nth-child(1) > .smalltext").childNodes[0].remove()
-        //        }
-        //        var a = document.createElement("h1")
-        //        a.innerText = "Users Browsing"
-        //        div.prepend(a)
-        //        div.style.display = "flex"
-        //        div.style.flexDirection = "column"
-        //    }
-       // } catch {
+        try {
+            if (document.location.href.indexOf("/forumdisplay") > -1 && !checkNoPerms()) {
+                var div = document.querySelector("#content > div:nth-child(1)")
+                if (div.onclick) {
+                    div = document.querySelector("#content > div:nth-child(2)")
+                    document.querySelector("#content > div:nth-child(2) > .smalltext").childNodes[0].remove()
+                }
+                else {
+                    document.querySelector("#content > div:nth-child(1) > .smalltext").childNodes[0].remove()
+                }
+                var a = document.createElement("h1")
+                a.innerText = "Users Browsing"
+                a.style.marginTop = "0px"
+                div.prepend(a)
+                div.style.display = "flex"
+                div.style.flexDirection = "column"
+
+                // remove advertisement thing
+                document.querySelector("#content > div:nth-child(1)").remove()
+            }
+        } catch {
             // Dont Do Anything, isn't really a point to lmao
-       // }
+        }
 
         // replace the Direct link text with a few icons, remove the rate buttons if the post is yours
         if (document.location.href.indexOf("v3rmillion.net/showthread.php?") > -1 && !checkNoPerms()) {
@@ -172,39 +223,43 @@
             })
 
             // add the "add friend" button that adds the user to the buddy list
-            //getAllNonSelfPosts().forEach(post => {
-           //     var image = document.createElement("img")
-           //     image.src = "https://cdn-icons-png.flaticon.com/512/2583/2583118.png"
-           //     image.style.width = "23px"
-            //    image.style.height = "20px"
-            //    image.style.filter = "invert(50%)"
-            //    image.style.cursor = "pointer"
+            getAllNonSelfPosts().forEach(post => {
+                var image = document.createElement("img")
+                image.src = "https://cdn-icons-png.flaticon.com/512/2583/2583118.png"
+                image.id = "BuddyButton"
+                image.style.width = "23px"
+                image.style.height = "20px"
+                image.style.filter = "invert(50%)"
+                image.style.cursor = "pointer"
 
-            //    var username = extractUsernamefromPost(post)
+                var username = extractUsernamefromPost(post)
 
                 // the following filters are calculated by https://codepen.io/sosuke/pen/Pjoqqp
-             //   image.onclick = () => {
-             //       fetch("usercp.php?action=do_editlists&add_username=" + username + "&my_post_key="+ my_post_key, { method: 'POST'}).then((res) => {
-             //           if (res.ok) {
-             //               image.style.filter = "invert(26%) sepia(77%) saturate(4352%) hue-rotate(83deg) brightness(93%) contrast(92%)"
-             //               setTimeout(() => {
-             //                   image.style.filter = "invert(50%)"
-              //              }, 2000);
-              //          }
-              //          else {
-             //               image.style.filter = "invert(21%) sepia(25%) saturate(5820%) hue-rotate(339deg) brightness(106%) contrast(111%)"
-              //             setTimeout(() => {
-              //                image.style.filter = "invert(50%)"
-              //             }, 2000);
-              //       }
-              //     })
-             //  }
-            //    document.querySelector("#" + post.id + "> .post_head > .float_right").append(image)
-          //  })
+                image.onclick = () => {
+                    fetch("usercp.php?action=do_editlists&add_username=" + username + "&my_post_key="+ my_post_key, { method: 'POST'}).then((res) => {
+                        if (res.ok) {
+                            image.style.filter = "invert(26%) sepia(77%) saturate(4352%) hue-rotate(83deg) brightness(93%) contrast(92%)"
+                            setTimeout(() => {
+                                image.style.filter = "invert(50%)"
+                            }, 2000);
+                        }
+                        else {
+                            image.style.filter = "invert(21%) sepia(25%) saturate(5820%) hue-rotate(339deg) brightness(106%) contrast(111%)"
+                            setTimeout(() => {
+                                image.style.filter = "invert(50%)"
+                            }, 2000);
+                        }
+                    })
+                }
+                document.querySelector("#" + post.id + "> .post_head > .float_right").append(image)
+                document.querySelector("#" + post.id + "> .post_head > .float_right").style.display = "flex"
+            })
 
+            // add reputation button
             getAllNonSelfPosts().forEach(post => {
                 var image = document.createElement("img")
                 image.src = "https://cdn-icons-png.flaticon.com/512/1828/1828961.png"
+                image.id = "ReputationButton"
                 image.style.width = "20px"
                 image.style.height = "20px"
                 image.style.filter = "invert(50%)"
@@ -219,13 +274,33 @@
             })
         }
 
-        // code that v3rm uses to indicate what tabs are collapsed or not, this is all of them collapsed
-       // const closed = 'cat_34|cat_8|cat_6|boardstats|cat_17|cat_27|cat_7|cat_3'
+        if ((document.location.href.indexOf("v3rmillion.net/index.php") > -1 && !checkNoPerms())) {
+            var skipnavigationcheck = false
 
-        // make it so next time its all closed
-       // window.addEventListener("beforeunload", function(e){
-       //    setCookie("collapsed", closed, 365)
-      //  }, false);
+            if (document.querySelector("#down_alert").style.display == "block") {
+                document.querySelector(".navigation > span.active").remove()
+                document.querySelector("#down_alert").style.display = "flex"
+                document.querySelector("#down_alert").style.alignItems = "center"
+                document.querySelector("#down_alert").style.justifyContent = "center"
+
+                document.querySelector("#down_alert").style.textAlign = "center"
+                skipnavigationcheck = true
+            }
+
+            if (!skipnavigationcheck) document.querySelector("#container > div.navigation").remove()
+        }
+
+        // code that v3rm uses to indicate what tabs are collapsed or not, this is all of them collapsed
+        //const closed = 'cat_34|cat_8|cat_6|boardstats|cat_17|cat_27|cat_7|cat_3'
+
+        /* make it so next time its all closed
+        window.addEventListener("beforeunload", function(e){
+            if (settingsarray.closeAllSections) {
+                setCookie("collapsed", closed.replace("|", "%7C"), 365)
+            }
+
+            setCookie("BetterV3rmSettings", JSON.stringify(settingsarray), 365)
+        });*/
 
         function injectCSS(css, append) {
             let test = document.querySelector("#CustomCSS")
@@ -254,8 +329,21 @@
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
-        // V3rmillion text
-        //document.querySelector("#container > div.navigation").remove()
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+              let c = ca[i];
+              while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+              }
+            }
+            return "";
+        }
 
         // stupid advertise with us
         var advert = document.querySelector("#sharingPlace")
@@ -265,7 +353,149 @@
         document.querySelector("#bridge > div > ul > li:nth-child(5) > a").remove()
         document.querySelector("#bridge > div > ul > li:nth-child(6) > a").remove()
 
-         // weird doggo
+
+        // add the popup to the html
+        var settingspopup = document.createElement("div")
+        settingspopup.style.display = "none"
+        settingspopup.className = "settingscontainer"
+        settingspopup.id = "settingscontainer"
+        settingspopup.innerHTML = PopupHTML
+
+        document.body.append(settingspopup)
+
+        // Add settings button at the top
+        var toplinks = document.querySelector(".menu.top_links")
+        var settings = document.createElement("li")
+        settings.id = "better-verm-settings"
+
+        settings.style.cursor = "pointer"
+        settings.style.padding = "15px 10px 14px"
+
+        var settingsimg = document.createElement("i")
+        settingsimg.classList.add("fa")
+        settingsimg.classList.add("fa-cog")
+
+        var settingstext = document.createElement("span")
+        settingstext.textContent = "retarded platos man"
+        settingstext.style.paddingLeft = "5px"
+
+        var settingsbackground = document.createElement("ul")
+
+        settings.append(settingstext)
+        settings.prepend(settingsimg)
+        settings.append(settingsbackground)
+        toplinks.append(settings)
+
+        // when the "better v3rm settings" is pressed
+        settings.onclick = ()=>{
+            if (settingspopup.style.display == "none") {
+                settingspopup.style.display = "flex"
+                document.body.style.overflowY = "hidden"
+            }
+            else {
+                settingspopup.style.display = "none"
+                document.body.style.overflowY = ""
+            }
+        }
+
+        // if the click is on the background
+        settingspopup.addEventListener("click", (e) => {
+            if (e.composedPath()[0].id != "settingscontainer") return;
+            if (settingspopup.style.display == "none") return;
+
+            settingspopup.style.display = "none"
+            document.body.style.overflowY = ""
+        })
+
+        // if they pressed the x
+        document.querySelector("#closesettings").onclick = () => {
+            settingspopup.style.display = "none"
+            document.body.style.overflowY = ""
+        }
+
+        document.querySelector("#closesettings").style.cursor = "pointer"
+
+        var gradientToggle = document.querySelector("#GradientToggle")
+        var buddyButtonToggle = document.querySelector("#BuddyToggle")
+        var repButtonToggle = document.querySelector("#ReputationToggle")
+        var closeSections = document.querySelector("#SectionsToggle")
+
+        function toggleGradients(toggle) {
+            if (toggle) {
+                document.querySelector("#bridge").setAttribute("data-applygradient", true)
+                document.querySelector("#footer").setAttribute("data-applygradient", true)
+                document.querySelector("div#header").setAttribute("data-applygradient", true)
+            }
+            else {
+                document.querySelector("#bridge").setAttribute("data-applygradient", false)
+                document.querySelector("#footer").setAttribute("data-applygradient", false)
+                document.querySelector("div#header").setAttribute("data-applygradient", false)
+            }
+        }
+
+        function toggleBuddyButton(toggle) {
+            if (document.location.href.indexOf("v3rmillion.net/showthread.php?") == -1 || checkNoPerms()) return;
+
+            if (toggle) {
+                document.querySelector("#BuddyButton").style.display = "block"
+            }
+            else {
+                document.querySelector("#BuddyButton").style.display = "none"
+            }
+        }
+
+        function toggleReputationButton(toggle) {
+            if (document.location.href.indexOf("v3rmillion.net/showthread.php?") == -1 || checkNoPerms()) return;
+
+            if (toggle) {
+                document.querySelector("#ReputationButton").style.display = "block"
+            }
+            else {
+                document.querySelector("#ReputationButton").style.display = "none"
+            }
+        }
+
+        // checks for if its enabled
+        if (settingsarray.enableGradients) {
+            gradientToggle.checked = true
+        }
+
+        if (settingsarray.injectBuddyButton) {
+            buddyButtonToggle.checked = true
+        }
+
+        if (settingsarray.injectRepButton) {
+            repButtonToggle.checked = true
+        }
+
+        if (settingsarray.closeAllSections) {
+            closeSections.checked = true
+        }
+
+        toggleGradients(settingsarray.enableGradients)
+        toggleBuddyButton(settingsarray.injectBuddyButton)
+        toggleReputationButton(settingsarray.injectRepButton)
+
+        gradientToggle.onclick = () => {
+            settingsarray.enableGradients = gradientToggle.checked
+            toggleGradients(gradientToggle.checked)
+        }
+
+        buddyButtonToggle.onclick = () => {
+            settingsarray.injectBuddyButton = buddyButtonToggle.checked
+            toggleBuddyButton(buddyButtonToggle.checked)
+        }
+
+        repButtonToggle.onclick = () => {
+            settingsarray.injectRepButton = repButtonToggle.checked
+            toggleReputationButton(repButtonToggle.checked)
+        }
+
+        closeSections.onclick = () => {
+            settingsarray.closeAllSections = closeSections.checked
+        }
+
+        // weird doggo
         var peeka = document.querySelector("#peeka")
         if (peeka) peeka.remove()
         // bye bye peeka
@@ -321,7 +551,7 @@
         document.querySelector("#footer > ul:nth-child(1) > h2").innerText = "Important"
         document.querySelector("#footer > ul:nth-child(2) > h2").innerText = "Other Links"
 
-        var mouseOver = false
+        /*var mouseOver = false
 
         document.querySelectorAll(".thead div:nth-child(2) > strong").forEach(str => {
             if (str.innerText == "Board Statistics") return
@@ -329,12 +559,12 @@
             str.addEventListener("mouseleave", ()=>{mouseOver = false})
         })
 
-        document.querySelectorAll("td.thead > .expcolimage > img").forEach(img => {
+        document.querySelectorAll(".thead > .expcolimage > img").forEach(img => {
             img.addEventListener("mouseover", ()=>{mouseOver = true})
             img.addEventListener("mouseleave", ()=>{mouseOver = false})
         })
 
-        document.querySelectorAll("td.thead.thead_collapsed").forEach(thead => {
+        document.querySelectorAll(".thead:has(div.expcolimage)").forEach(thead => {
             thead.style.cursor = "pointer"
             thead.onclick = ()=>{
                 for(var i=0; i < thead.children.length; i++) {
@@ -347,15 +577,15 @@
                     }
                 }
             }
-        })
+        })*/
 
         // CSS stuff from here
 
         // add the cool black to red gradient line
-       // injectCSS('#bridge { border-bottom: 5px solid; border-image-slice: 1; border-image-source: linear-gradient(to left, #ab0000, #0f0d0d); }', true);
+        injectCSS('#bridge[data-applygradient=true] { border-bottom: 5px solid; border-image-slice: 1; border-image-source: linear-gradient(to left, #ab0000, #0f0d0d); }', true);
 
         // add the cool red to black gradient line
-       // injectCSS('#footer {border-top: 5px solid; border-image-slice: 1; border-image-source: linear-gradient(to right, #ab0000, #0f0d0d);}', true)
+        injectCSS('#footer[data-applygradient=true] {border-top: 5px solid; border-image-slice: 1; border-image-source: linear-gradient(to right, #ab0000, #0f0d0d);}', true)
 
         // add the user avatar back and make it look good
         injectCSS('.user_avatar { border:none !important; margin-right:7px; margin-left:3px; }', true);
@@ -367,14 +597,14 @@
         injectCSS("ul.bottommenu {text-align:center; padding-bottom: 67px !important;}", true)
 
         // gradient back animation
-      //  injectCSS('@keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }', true)
+        injectCSS('@keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }', true)
 
         // these are just colors I was testing for the gradient, the bottom is the best one.
         // #ab0000, #0c0f45, #2f004f, #0f0d0d
         // #0c0f45, #ab0000, #0f0d0d, 2f004f
 
         // gradient back
-       // injectCSS('div#header { background: linear-gradient(to right, #ab0000, #0c0f45, #2f004f, #0f0d0d); background-size: 400% 400%; animation: gradient 15s ease infinite;}', true)
+        injectCSS('div#header[data-applygradient=true] { background: linear-gradient(to right, #ab0000, #0c0f45, #2f004f, #0f0d0d); background-size: 400% 400%; animation: gradient 15s ease infinite;}', true)
 
         // no rounded edges on those red things (at the top of it)
         injectCSS('.thead {border-top-left-radius: 0; border-top-right-radius: 0;}', true)
@@ -393,5 +623,22 @@
         // no bottom rounded (no work)
         //injectCSS('.tborder tbody tr:last-child>td:first-child {border-bottom-right-radius: 0;}', true)
         //injectCSS('.tborder tbody tr:last-child>td:first-child {border-bottom-left-radius: 0;}', true)
+
+        // settings menu stuff
+        injectCSS(".settingscontainer {background: radial-gradient(black, transparent);color:white; position:absolute; left:0; top:0; width:100%; height: 100vh; display:flex; justify-content:center; align-items:center; z-index:999;}", true)
+        injectCSS("#SettingsMenu { width:40%; height: 60%; background: rgba(0,0,0,1)}", true)
+
+        injectCSS(".options {width:100%; height: 90%; background-color:rgb(16,16,16); display:flex; flex-direction: column; column-count: 3; justify-content: center; align-items:center;}", true)
+        injectCSS(".options > * > h5 {margin:unset;}", true)
+
+        injectCSS(".toprow { background:#cd1818; position:relative; top: 0px; display: flex; flex-direction:row; align-items: center; justify-content: center; padding-top: 5px; padding-bottom: 5px}", true)
+        injectCSS(".toprow > h2 {margin:unset; float:left;}", true)
+
+        injectCSS(".settingsfooter { background:#cd1818; position:relative; top: 0px; display: flex; align-items: center; justify-content: center; padding-top: 5px; padding-bottom: 5px; border-bottom-right-radius:5px; border-bottom-left-radius: 5px; }", true)
+        injectCSS(".settingsfooter > h2 {margin:unset;}", true)
+
+        injectCSS(".option { display:flex; justify-content:center; align-items: center; flex-direction: row; margin-top:5px}", true)
+
+        injectCSS(".option > input[type='checkbox'] {margin:unset; margin-left:5px;}", true)
     }
 })();
