@@ -11,6 +11,11 @@ including:
 
 -less retardation
 
+-no member browsing change (its retarded and weird af)
+
+-i do not add settings for these fixes as i am a lazy bum i mean- democrasy is stupid the people are retarded
+
+
 
 
 
