@@ -134,7 +134,7 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
 
         // page specific features
         // little easter egg
-        if (document.location.href.indexOf("v3rmillion.net/member.php?") > -1 && !checkNoPerms()) {
+        /*if (document.location.href.indexOf("v3rmillion.net/member.php?") > -1 && !checkNoPerms()) {
             var lease, synapse, x= false
             document.querySelector("#content > table > tbody > tr > td:nth-child(3) > table:nth-child(3) > tbody > tr:nth-child(2) > td").childNodes.forEach((el) => {
                 if (el.textContent.toLowerCase().indexOf("lease") > -1 || (el.textContent.toLowerCase().indexOf("leasing") > -1)) lease = true
@@ -142,10 +142,10 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
                 if (el.textContent.toLowerCase().indexOf("x") > -1) x = true
             })
             if (lease && synapse && x) console.log("Yea, I lease synapse too :(")
-        }
+        }*/
 
         // users browsing change
-        try {
+        /*try {
             if (document.location.href.indexOf("/forumdisplay") > -1 && !checkNoPerms()) {
                 var div = document.querySelector("#content > div:nth-child(1)")
                 if (div.onclick) {
@@ -167,7 +167,7 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
             }
         } catch {
             // Dont Do Anything, isn't really a point to lmao
-        }
+        }*/
 
         // replace the Direct link text with a few icons, remove the rate buttons if the post is yours
         if (document.location.href.indexOf("v3rmillion.net/showthread.php?") > -1 && !checkNoPerms()) {
