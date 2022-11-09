@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         retarded v3rm
-// @namespace    https://github.com/6yNuiC9/v3rm-shit
+// @namespace    https://github.com/6yNuiC9/v3rm-shit/blob/main/monkey-den-real.js
 // @version      math.huge
 // @description  v3rm monkey den update, stupid retard accidentally is so retarded to make script less retarded
 // @author       littlepriceonu#0001, edited by stupid retard
