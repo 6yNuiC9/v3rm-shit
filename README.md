@@ -15,14 +15,14 @@ including:
 
 -i do not add settings for these fixes as i am a lazy bum i mean- democrasy is stupid the people are retarded
 
+-i do not brick your homepage and collapse everything until you unbrick it (remove cookies)
 
 
 
 
 
 
-
-EVERYTHING IS A LIE:
+# EVERYTHING IS A LIE:
 
 -we added the go back thread button back
 
