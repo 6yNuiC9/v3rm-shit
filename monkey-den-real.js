@@ -223,7 +223,7 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
             })
 
             // add the "add friend" button that adds the user to the buddy list
-            getAllNonSelfPosts().forEach(post => {
+           /* getAllNonSelfPosts().forEach(post => {
                 var image = document.createElement("img")
                 image.src = "https://cdn-icons-png.flaticon.com/512/2583/2583118.png"
                 image.id = "BuddyButton"
@@ -253,7 +253,7 @@ By: littlepriceonu#0001`, "background: linear-gradient(to right, #ab0000, #0f0d0
                 }
                 document.querySelector("#" + post.id + "> .post_head > .float_right").append(image)
                 document.querySelector("#" + post.id + "> .post_head > .float_right").style.display = "flex"
-            })
+            })*/
 
             // add reputation button
             getAllNonSelfPosts().forEach(post => {
