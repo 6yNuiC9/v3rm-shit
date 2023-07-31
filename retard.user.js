@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          pink v3rm
 // @namespace     https://v3rmillion.net
-// @description	  hell is full
+// @description	  hell is full https://greasyfork.org/en/scripts/371842-pink-v3rmillion-v1/code
 // @author        ??
 // @homepage      ??
 // @include       https://v3rmillion.net*
